@@ -1,5 +1,6 @@
 /* =============================================
    ZUPER ZTORE AI ASSISTANT - Styles
+   FIXED FOR MOBILE
    ============================================= */
 
 #chat-assistant-container {
@@ -56,7 +57,7 @@
 
 .unread-badge.show { display: flex; }
 
-/* Chat Window */
+/* Chat Window - FIXED for mobile */
 .chat-window {
     display: none;
     width: 380px;
@@ -117,6 +118,7 @@
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
+    min-height: 64px;
 }
 
 .chat-header-left {
@@ -270,6 +272,8 @@
     display: flex;
     gap: 10px;
     flex-shrink: 0;
+    min-height: 60px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
 }
 
 .chat-input-wrapper {
@@ -280,6 +284,7 @@
 .chat-input-wrapper input {
     width: 100%;
     padding: 10px 14px;
+    padding-right: 50px;
     border: 1px solid #ddd;
     border-radius: 25px;
     font-size: 14px;
@@ -367,25 +372,133 @@
     padding: 20px;
 }
 
-/* Mobile Responsive */
+/* =============================================
+   MOBILE FIXES - Critical changes
+   ============================================= */
+
 @media (max-width: 480px) {
     .chat-window {
-        width: 100vw;
-        max-width: 100vw;
-        height: 100vh;
-        max-height: 100vh;
-        border-radius: 0;
-        margin-bottom: 0;
         position: fixed;
         bottom: 0;
         right: 0;
         left: 0;
         top: 0;
+        width: 100vw;
+        max-width: 100vw;
+        height: 100dvh;  /* ✅ FIXED: Use dynamic viewport height */
+        max-height: 100dvh;  /* ✅ FIXED: Use dynamic viewport height */
+        border-radius: 0;
+        margin-bottom: 0;
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
     }
     
     .chat-toggle-btn {
         width: 50px;
         height: 50px;
         font-size: 24px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    /* ✅ FIXED: Hide the toggle close button on mobile (already have top close) */
+    .chat-toggle-btn .close-icon {
+        display: none !important;
+    }
+    
+    /* Ensure chat header is always visible */
+    .chat-header {
+        min-height: 56px;
+        padding: 12px 16px;
+    }
+    
+    .chat-header-actions button {
+        padding: 8px;
+        font-size: 20px;
+    }
+    
+    .chat-messages {
+        padding: 12px 16px;
+        height: calc(100dvh - 120px);  /* ✅ FIXED: Dynamic height */
+    }
+    
+    .chat-input-container {
+        padding: 10px 16px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+        min-height: 56px;
+    }
+    
+    .chat-input-wrapper input {
+        font-size: 16px;  /* Prevent iOS zoom */
+        padding: 12px 14px;
+        padding-right: 50px;
+    }
+    
+    .chat-input-container button {
+        padding: 12px 16px;
+        font-size: 14px;
+        min-width: 60px;
+    }
+    
+    .quick-replies {
+        padding: 6px 16px 2px;
+        gap: 6px;
+    }
+    
+    .quick-reply-btn {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+    
+    /* ✅ FIXED: Better message spacing */
+    .message {
+        max-width: 90%;
+        font-size: 15px;
+        padding: 10px 14px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 380px) {
+    .chat-window {
+        height: 100dvh;
+        max-height: 100dvh;
+    }
+    
+    .chat-header h3 {
+        font-size: 14px;
+    }
+    
+    .chat-input-wrapper input {
+        font-size: 14px;
+        padding: 10px 12px;
+        padding-right: 45px;
+    }
+    
+    .chat-input-container button {
+        padding: 10px 14px;
+        font-size: 13px;
+        min-width: 50px;
+    }
+    
+    .quick-reply-btn {
+        font-size: 10px;
+        padding: 2px 8px;
+    }
+}
+
+/* ✅ FIXED: Android Chrome URL bar fix */
+@supports (-webkit-touch-callout: none) {
+    .chat-window {
+        height: -webkit-fill-available;
+        max-height: -webkit-fill-available;
+    }
+}
+
+/* ✅ FIXED: Safe area for notched phones */
+@supports (padding: max(0px)) {
+    .chat-window {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
     }
 }
