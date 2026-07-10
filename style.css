@@ -40,8 +40,7 @@
 }
 
 .chat-toggle-btn .close-icon { display: none; }
-.chat-toggle-btn.active .chat-icon { display: none; }
-.chat-toggle-btn.active .close-icon { display: inline; }
+ display: none !important;
 
 /* Unread Badge */
 .unread-badge {
