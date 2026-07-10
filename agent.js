@@ -167,30 +167,42 @@ class ChatAssistant {
     // =============================================
     // CHAT CONTROLS
     // =============================================
-    
-    toggleChat() {
-        if (this.isOpen) {
-            this.closeChat();
-        } else {
-            this.openChat();
-        }
+
+      // =============================================
+// CHAT CONTROLS - UPDATED
+// =============================================
+
+toggleChat() {
+    if (this.isOpen) {
+        this.closeChat();
+    } else {
+        this.openChat();
     }
+}
+
+openChat() {
+    this.window.classList.add('open');
+    this.toggleBtn.classList.add('active');
+    this.isOpen = true;
+    this.unreadCount = 0;
+    this.unreadBadge.classList.remove('show');
     
-    openChat() {
-        this.window.classList.add('open');
-        this.toggleBtn.classList.add('active');
-        this.isOpen = true;
-        this.unreadCount = 0;
-        this.unreadBadge.classList.remove('show');
-        setTimeout(() => this.input.focus(), 300);
-        this.scrollToBottom();
-    }
+    // ✅ FIX: Hide toggle button when chat opens
+    this.toggleBtn.style.display = 'none';
     
-    closeChat() {
-        this.window.classList.remove('open');
-        this.toggleBtn.classList.remove('active');
-        this.isOpen = false;
-    }
+    setTimeout(() => this.input.focus(), 300);
+    this.scrollToBottom();
+}
+
+closeChat() {
+    this.window.classList.remove('open');
+    this.toggleBtn.classList.remove('active');
+    this.isOpen = false;
+    
+    // ✅ FIX: Show toggle button when chat closes
+    this.toggleBtn.style.display = 'flex';
+}
+
     
     // =============================================
     // MESSAGE HANDLING
