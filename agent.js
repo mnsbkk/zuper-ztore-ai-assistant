@@ -1,5 +1,6 @@
 /* =============================================
    ZUPER ZTORE AI ASSISTANT - Core Class
+   FIXED: Toggle button hidden when chat is open
    ============================================= */
 
 class ChatAssistant {
@@ -101,7 +102,6 @@ class ChatAssistant {
                     <button id="send-btn">Send</button>
                 </div>
             </div>
-            <!-- ✅ FIXED: Removed the close icon from toggle button -->
             <button class="chat-toggle-btn" id="chat-toggle-btn">
                 <span class="chat-icon">💬</span>
                 <span class="unread-badge" id="unread-badge">0</span>
@@ -165,44 +165,39 @@ class ChatAssistant {
     }
     
     // =============================================
-    // CHAT CONTROLS
+    // CHAT CONTROLS - FIXED
     // =============================================
-
-      // =============================================
-// CHAT CONTROLS - UPDATED
-// =============================================
-
-toggleChat() {
-    if (this.isOpen) {
-        this.closeChat();
-    } else {
-        this.openChat();
+    
+    toggleChat() {
+        if (this.isOpen) {
+            this.closeChat();
+        } else {
+            this.openChat();
+        }
     }
-}
-
-openChat() {
-    this.window.classList.add('open');
-    this.toggleBtn.classList.add('active');
-    this.isOpen = true;
-    this.unreadCount = 0;
-    this.unreadBadge.classList.remove('show');
     
-    // ✅ FIX: Hide toggle button when chat opens
-    this.toggleBtn.style.display = 'none';
+    openChat() {
+        this.window.classList.add('open');
+        this.toggleBtn.classList.add('active');
+        this.isOpen = true;
+        this.unreadCount = 0;
+        this.unreadBadge.classList.remove('show');
+        
+        // ✅ FIX: Hide toggle button when chat opens
+        this.toggleBtn.style.display = 'none';
+        
+        setTimeout(() => this.input.focus(), 300);
+        this.scrollToBottom();
+    }
     
-    setTimeout(() => this.input.focus(), 300);
-    this.scrollToBottom();
-}
-
-closeChat() {
-    this.window.classList.remove('open');
-    this.toggleBtn.classList.remove('active');
-    this.isOpen = false;
-    
-    // ✅ FIX: Show toggle button when chat closes
-    this.toggleBtn.style.display = 'flex';
-}
-
+    closeChat() {
+        this.window.classList.remove('open');
+        this.toggleBtn.classList.remove('active');
+        this.isOpen = false;
+        
+        // ✅ FIX: Show toggle button when chat closes
+        this.toggleBtn.style.display = 'flex';
+    }
     
     // =============================================
     // MESSAGE HANDLING
