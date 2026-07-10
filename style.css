@@ -57,7 +57,7 @@
 
 .unread-badge.show { display: flex; }
 
-/* Chat Window - FIXED for mobile */
+/* Chat Window */
 .chat-window {
     display: none;
     width: 380px;
@@ -401,7 +401,7 @@
         right: 10px;
     }
     
-    /* ✅ FIXED: Hide the toggle close button on mobile (already have top close) */
+    /* ✅ FIXED: Hide the toggle close icon on mobile (already have top close) */
     .chat-toggle-btn .close-icon {
         display: none !important;
     }
